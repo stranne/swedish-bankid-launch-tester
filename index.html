@@ -22,13 +22,13 @@
     <header>
         <h1>Swedish BankID Launch Tester</h1>
         <p>Configure your <a
-                href="https://www.bankid.com/en/utvecklare/guider/teknisk-integrationsguide/programstart#launching-from-a-browser"
+                href="https://developers.bankid.com/getting-started/frontend/autostart"
                 target="_blank" rel="noopener">launch</a> test below:</p>
     </header>
     <main>
         <form id="testForm">
-            <label for="urlType">URL Type:</label>
-            <select id="urlType" name="urlType" onchange="updateUI()">
+            <label for="urlScheme">URL Scheme:</label>
+            <select id="urlScheme" name="urlScheme" onchange="updateUI()">
                 <option value="bankid:///?autostarttoken=&redirect=">bankid://</option>
                 <option value="https://app.bankid.com/?autostarttoken=&redirect=">https://app.bankid.com/</option>
             </select>
@@ -53,14 +53,14 @@
         window.addEventListener("pageshow", updateUI);
 
         function updateUI() {
-            const urlTypeValue = document.getElementById('urlType').value;
+            const urlSchemeValue = document.getElementById('urlScheme').value;
             const testMethodValue = document.getElementById('testMethod').value;
             const delayOptions = document.getElementById('delayOptions');
             const directLink = document.getElementById('directLink');
             const windowLocationButton = document.getElementById('windowLocationButton');
 
             // Update Direct Link
-            directLink.href = urlTypeValue;
+            directLink.href = urlSchemeValue;
             directLink.style.display = (testMethodValue === 'direct') ? 'block' : 'none';
 
             // Toggle visibility of delay options and button based on selected method
@@ -78,7 +78,7 @@
         }
 
         function redirectToURL() {
-            const url = document.getElementById('urlType').value;
+            const url = document.getElementById('urlScheme').value;
             const delay = parseInt(document.getElementById('delay').value, 10) * 1000;
 
             // Use setTimeout to handle delay, if specified
